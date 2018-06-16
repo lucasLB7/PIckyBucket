@@ -1,0 +1,1 @@
+web: gunicorn zoomin_photos.wsgi
