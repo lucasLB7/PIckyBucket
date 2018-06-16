@@ -1,0 +1,149 @@
+@import url('https://fonts.googleapis.com/css?family=Mitr|Orbitron|Share+Tech|Share+Tech+Mono|Titan+One');
+@import url('https://fonts.googleapis.com/css?family=Bungee+Shade|Coda+Caption:800|Holtwood+One+SC|Italiana|Libre+Barcode+39+Text');
+
+
+/* font-family: 'Share Tech', sans-serif;
+font-family: 'Share Tech Mono', monospace;
+font-family: 'Orbitron', sans-serif;
+font-family: 'Titan One', cursive;
+font-family: 'Mitr', sans-serif;
+
+---------------------------------
+
+font-family: 'Italiana', serif;
+font-family: 'Bungee Shade', cursive;
+font-family: 'Coda Caption', sans-serif;
+font-family: 'Holtwood One SC', serif;
+font-family: 'Libre Barcode 39 Text', cursive;
+*/
+
+
+.home-background{
+  background-color: rgba(245, 245, 245, 0.432);
+}
+
+.images-home{
+  box-shadow: 10px 10px 5px black;
+  background-color: rgba(255, 255, 255, 0.404);
+  border-radius: 5px 0 5px 0;
+  /* margin: 2%; */
+  /* opacity: 0.5; */
+
+}
+.images-home h1{
+  color: rgb(33, 38, 43);
+  text-align: center;
+  font-family: 'Share Tech Mono', monospace;
+}
+
+
+.articles-home h2 {
+  text-align: center
+}
+
+.article-tag {
+  border-radius: 15px 5px 15px 5px;
+  background-color: #E8E8E8;
+  width: 200px;
+  height: 60px;
+  text-align: center;
+  box-shadow: 10px 10px 5px grey;
+  line-height: 60px; /* <-- this is what you must define */
+  vertical-align: middle;
+}
+
+.all-headers {
+  font-family: 'Titan One', cursive;
+}
+
+.of-less-importance-text {
+  font-family: 'Share Tech', sans-serif;
+  color: grey;
+}
+.todays_date{
+  font-family: 'Share Tech', sans-serif;
+  color: #fff;
+}
+.todays_date p {
+  font-size: 10px;
+}
+
+.cat-tag {
+  font-size: 12px;
+  border-radius: 15px 15px 15px 15px;
+  background-color: rgb(224, 190, 79);
+  padding: 1%;
+  width: 120px;
+  height: 60px;
+  text-align: center;
+  line-height: 60px; 
+  vertical-align: middle;
+}
+
+.bluecolor{
+  background-color: lightblue;
+}
+
+.ws-title{
+  background-image: url(/media/AdobeStock_164261744.jpeg);
+  text-align : center;
+}
+
+.ws-title h1{
+  font-family: 'Libre Barcode 39 Text', cursive;
+  font-size: 100px;
+}
+
+.background{
+  background-color: rgb(216, 110, 91);
+  width: 99%;
+  /* background-size: cover; */
+}
+
+
+/* .arrow_image {
+  width: 200px;
+  height: 60px;
+
+} */
+
+.arrow_image{
+  background-color: #fff;
+  padding: 3%;
+}
+
+.arrow_image img{
+  width: 200px;
+  height: auto;
+  margin: 3%;
+  margin: 0 auto;
+  margin-bottom: 1%;
+	display: block;
+}
+
+.white_fill{
+  background-color: rgb(240, 240, 240);
+  border-radius: 25px;
+  text-align: center;
+  font-family: 'Coda Caption', sans-serif;
+}
+
+.my-link{
+  color: rgb(94, 0, 0);
+}
+
+
+.navbar{
+  background-color: rgb(216, 110, 91);
+
+}
+
+.travel_emoji img{
+  width: 300px;
+}
+
+
+.search-box{
+  background-color: #fff;
+  height: 300px;
+}
