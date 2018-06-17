@@ -16,6 +16,7 @@ from decouple import config
 import django
 import django_heroku
 
+
 django_heroku.settings(locals(), staticfiles=False)
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
@@ -33,19 +34,21 @@ SECRET_KEY = config('SECRET_KEY')
 DEBUG = config('DEBUG', default=False, cast=bool)
 
 ALLOWED_HOSTS = ['*']
+LOGIN_REDIRECT_URL = '/'
 
 
 # Application definition
 
 INSTALLED_APPS = [
-    'boosttrap3'
+    'bootstrap3',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'images'
+    'images',
+    'location_field.apps.DefaultConfig'
 ]
 
 MIDDLEWARE = [
@@ -139,3 +142,11 @@ STATICFILES_STORAGE = 'whitenoise.django.GzipManifestStaticFilesStorage'
 
 MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
+
+
+# Email configurations remember to install python-decouple
+EMAIL_USE_TLS = config('EMAIL_USE_TLS')
+EMAIL_HOST = config('EMAIL_HOST')
+EMAIL_PORT = config('EMAIL_PORT')
+EMAIL_HOST_USER = config('EMAIL_HOST_USER')
+EMAIL_HOST_PASSWORD = config('EMAIL_HOST_PASSWORD')
