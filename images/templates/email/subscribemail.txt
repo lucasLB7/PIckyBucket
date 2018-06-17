@@ -1,0 +1,5 @@
+Hello {{name}}
+
+Welcome to the clan!
+
+You have succesfully registered!

@@ -1,0 +1,158 @@
+{% extends 'base/base.html' %}
+{% load bootstrap3 %}
+
+{% block script %}
+  <script type="text/javascript">
+    $('#clip_board').attr('data-clipboard-text', $(".text_copy").text())
+    window.onload = function(){
+        var client = new ZeroClipboard(document.getElementsByClassName("image.article_image") );
+        client.on( "ready", function( readyEvent ) {
+          client.on( "aftercopy", function( event ) {
+            alert("Copied.." );
+          });
+        });
+      }
+    </script>
+{%endblock%}
+
+{% block content %}
+{{block.super}}
+<div class="background">
+    <div class="row">
+
+
+      
+        <div class="col-md-3 travel_emoji"> 
+          <!-- content for left widgets -->
+              <img src="../../media/travel_emoji.jpg"  alt="">
+              <h1 class="search-box text-center">test</h1>
+            </div>
+
+        
+            
+         
+
+        <div class="col-md-6 container home-background"> 
+        <!-- main content -->
+        <h3 class="all-headers image-center text-center">Browse images:</h3>
+          
+     
+     <div class="row center-text">
+
+
+       {% for item in all_images %}
+      
+       <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6 images-home">
+           <h1 class="cardHeader">{{item.title}}</h1>
+
+           {% if item.article_image.url %}
+
+           <img src="{{ item.article_image.url }}" class="img-responsive" alt="Image">
+
+           {% else %}
+
+           <p>No images here..</p>
+           {% endif %}
+           <h2> {{news_item.title}} </h2>
+           <hr>
+
+
+
+        <!-- Trigger the modal with a button -->
+<button type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#{{item.id}}">Open Modal</button>
+
+<!-- Modal -->
+<div id="{{item.id}}" class="modal fade" role="dialog">
+  <div class="modal-dialog">
+
+    <!-- Modal content-->
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+        <h4 class="modal-title">Modal Header</h4>
+      </div>
+      <div class="modal-body">
+          {% if item.article_image.url %}
+        <p><img src="{{ item.article_image.url }}" class="img-responsive" alt="Image"></p>
+        <h2>{{item.title}}</h2>
+        <p> Posted by: <strong>{{item.editor}}</strong> </p>
+         <p> {{ news_item.post|truncatechars:150 }} <a href="/image/{{ item.id }}" class="btn btn-link my-link">Read more</a></p>
+        {% endif %}
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+               <h4 class="white_fill"> Category:</h4>
+
+               {% for category in item.category.all%}
+
+                    <span class="cat-tag">{{ category.category_type }} </span>
+                    {% endfor %}
+
+                    <h4 class="white_fill">Tags: </h4>
+                {% for tag in item.tag.all %}
+                    <span class="cat-tag">{{ tag.tags }} </span>
+                    {% endfor %}
+                    
+                    <h4 class="white_fill">Location: </h4>
+                    {% for loc in item.location.all %}
+                        <span class="cat-tag"><strong>{{ loc.country }}</strong> </span>
+                        <span class="cat-tag">{{ loc.continent }} </span>
+                        <span class="cat-tag">{{ loc.location_descrition }} </span>
+                        {% endfor %}
+                    
+
+           <p> {{news_item.editor}} </p>
+           <p class="small">Posted on: {{item.pub_date}} </p>
+           <button id='clip_board' data-clipboard-text="" class="copy-button">Copy to ClipBoard</button>
+           
+       </div>
+       {% empty %}
+       <div class="col-xs-5 col-sm-5 col-md-5 col-lg-5">
+           <h2> Whoop looks like we lost your pictures.... :O </h2>
+       </div>
+       {% endfor %} 
+       
+</div>
+</div>
+
+
+<div class="col-md-3"> 
+    <!-- content for left widgets -->
+    <div class="travel_emoji"> 
+        <!-- content for left widgets -->
+            <img src="../../media/boy-playing-guitar-music-character-by-Vexels.png"  alt="" style="margin-bottom: 40% "><br><br>
+            <img src="../../media/rocket-illustration-rocket-illustration-by-Vexels.png"  alt="">
+          </div>
+   </div>
+  </div>
+
+
+
+<div class="container-fluid">
+
+    <form  action="{%url 'home'%}" method="post">
+      {%csrf_token%}
+  
+      {% bootstrap_form form layout='inline' %}
+      <input type="submit" value="Subscribe">
+    </form>
+  
+  </div>
+      
+</div>
+</div>
+
+</div>
+</div>
+
+
+
+
+{% endblock %}
+
