@@ -1,5 +1,6 @@
 @import url('https://fonts.googleapis.com/css?family=Mitr|Orbitron|Share+Tech|Share+Tech+Mono|Titan+One');
 @import url('https://fonts.googleapis.com/css?family=Bungee+Shade|Coda+Caption:800|Holtwood+One+SC|Italiana|Libre+Barcode+39+Text');
+@import url('https://fonts.googleapis.com/css?family=Cabin|Open+Sans+Condensed:300|Poiret+One|Work+Sans');
 
 
 /* font-family: 'Share Tech', sans-serif;
@@ -15,7 +16,18 @@ font-family: 'Bungee Shade', cursive;
 font-family: 'Coda Caption', sans-serif;
 font-family: 'Holtwood One SC', serif;
 font-family: 'Libre Barcode 39 Text', cursive;
+
+
+---------------------------------
+
+font-family: 'Open Sans Condensed', sans-serif;
+font-family: 'Work Sans', sans-serif;
+font-family: 'Cabin', sans-serif;
+font-family: 'Poiret One', cursive;
 */
+
+
+
 
 
 .home-background{
@@ -31,7 +43,7 @@ font-family: 'Libre Barcode 39 Text', cursive;
 
 }
 .images-home h1{
-  color: rgb(33, 38, 43);
+  color: rgb(40, 96, 151);
   text-align: center;
   font-family: 'Share Tech Mono', monospace;
 }
@@ -92,6 +104,7 @@ font-family: 'Libre Barcode 39 Text', cursive;
 .ws-title h1{
   font-family: 'Libre Barcode 39 Text', cursive;
   font-size: 100px;
+  color: rgb(56, 112, 177)
 }
 
 .background{
@@ -108,7 +121,6 @@ font-family: 'Libre Barcode 39 Text', cursive;
 } */
 
 .arrow_image{
-  background-color: #fff;
   padding: 3%;
 }
 
@@ -134,7 +146,7 @@ font-family: 'Libre Barcode 39 Text', cursive;
 
 
 .navbar{
-  background-color: rgb(216, 110, 91);
+  background-color: rgb(52, 73, 167);
 
 }
 
@@ -147,3 +159,47 @@ font-family: 'Libre Barcode 39 Text', cursive;
   background-color: #fff;
   height: 300px;
 }
+
+.nav_btn{
+  /* border-style: solid;
+  border-color: #fff;
+  border-width: 2px;
+  border-radius: 10px 10px 10px 10px; */
+  color: #fff;
+  font-family: 'Work Sans', sans-serif;
+}
+
+.nav_btn_user{
+  /* border-style: solid;
+  border-color: #fff;
+  border-width: 2px;
+  border-radius: 10px 10px 10px 10px; */
+  color: rgb(155, 0, 0);
+  font-family: 'Work Sans', sans-serif;
+}
+
+.padded{
+  padding: 2%;
+}
+
+.navbar_logo{
+  padding: 1%;
+}
+.navbar_logo img{
+  width: 60px;
+  height: auto;
+}
+
+
+/* .arrow_image{
+  padding: 3%;
+}
+
+.arrow_image img{
+  width: 200px;
+  height: auto;
+  margin: 3%;
+  margin: 0 auto;
+  margin-bottom: 1%;
+	display: block;
+} */

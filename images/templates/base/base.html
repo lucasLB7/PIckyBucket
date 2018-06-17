@@ -7,9 +7,9 @@
   <meta charset="utf-8">
 
   {% if title %}
-  <title>Zoomin Photos - {{title}}</title>
+  <title>Picky-Bucket - {{title}}</title>
   {% else %}
-    <title> Zoomin Photos </title>
+    <title> Picky-Bucket </title>
   {% endif %}
 
   {% block styles %}
@@ -26,12 +26,52 @@
     {% block content %}
     <div class="container">
 
+            <div class="col-md-12">
+                    <div id="myCarousel" class="carousel slide" data-ride="carousel">
+                            <!-- Indicators -->
+                            <ol class="carousel-indicators">
+                                <li data-target="#myCarousel" data-slide-to="0" class="active"></li>
+                                <li data-target="#myCarousel" data-slide-to="1"></li>
+                                <li data-target="#myCarousel" data-slide-to="2"></li>
+                                <li data-target="#myCarousel" data-slide-to="3"></li>
+                                <li data-target="#myCarousel" data-slide-to="4"></li>
+                                <li data-target="#myCarousel" data-slide-to="5"></li>
+                            </ol>
+                            
+                            <!-- Wrapper for slides -->
+                            <div class="carousel-inner" role="listbox">
+                                {% for item in all_images %}
+                                {% if forloop.counter == 1 %}
+                                <div class="item active">
+                                {% else %}
+                                <div class="item">
+                                {% endif %}
+                                    <img src="{{ item.article_image.url }}" alt="Image">
+                              <div class="carousel-caption">
+
+                              </div>
+                                </div>
+                                {% endfor %}
+                                </div>
+                            
+                                <!-- Left and right controls -->
+                                <a class="left carousel-control" href="#myCarousel" role="button" data-slide="prev">
+                                    <span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
+                                    <span class="sr-only">Previous</span>
+                                </a>
+                                <a class="right carousel-control" href="#myCarousel" role="button" data-slide="next">
+                                    <span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
+                                    <span class="sr-only">Next</span>
+                                </a>
+                            </div>
+                </div>
+
            <div class="arrow_image">
-               <img src="../../../media/arrow_to_the_right.png" alt="">
+               <img src="../../../media/Photobucket-icon.png" alt="">
             </div>
 
             <div class="ws-title">
-                <h1>Zoomin-Photos</h1>
+                <h1>Welcome to Picky Bucket</h1>
             </div>
 
     </div> 

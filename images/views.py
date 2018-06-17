@@ -1,4 +1,4 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from django.http import HttpResponse, Http404, HttpResponseRedirect
 import datetime as dt
 from .models import Image,Category,Tag, Location, NewsLetterRecipients
@@ -42,6 +42,8 @@ def new_article(request):
             article = form.save(commit=False)
             article.editor = current_user
             article.save()
+            return redirect(homePageElements)
+            
     else:
         form = NewArticleForm()
     return render(request, 'new_article.html', {"form": form})

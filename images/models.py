@@ -131,6 +131,7 @@ class Image(models.Model):
     pub_date = models.DateTimeField(auto_now_add=True)
     article_image = models.ImageField(upload_to = 'view_images/')
     location = models.ManyToManyField(Location, related_name='location')
+    
     # comment = models.ManyToManyField(Comment, related_name='comment')
     # comments = models.ForeignKey(Comment)
 
