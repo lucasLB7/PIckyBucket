@@ -1,7 +1,7 @@
 from django.shortcuts import render, redirect
 from django.http import HttpResponse, Http404, HttpResponseRedirect
 import datetime as dt
-from .models import Image,Category,Tag, Location, NewsLetterRecipients
+from .models import Image,Category,Tag, Location, NewsLetterRecipients, Editor
 from django.db.models import Q
 from .forms import SubscribeForm, NewArticleForm
 from .email import registered 
@@ -13,6 +13,7 @@ from django.contrib.auth.decorators import login_required
 # @login_required(login_url='/auth/login/')
 def homePageElements(request):
     all_images = Image.view_all_pictures()
+    user_details = Editor.view_editor_details()
     rel_categories = Category.objects.all()
     rel_tags = Tag.objects.all()
     date = dt.date.today()
@@ -30,7 +31,7 @@ def homePageElements(request):
             HttpResponseRedirect('homePageElements')
     else:
         form = SubscribeForm()
-        return render(request, 'main/homepage.html', {"date": date, "all_images": all_images, "rel_categories":rel_categories, "rel_tags":rel_tags, "location": location, "title":title, "form":form })
+        return render(request, 'main/homepage.html', {"date": date, "all_images": all_images, "rel_categories":rel_categories, "rel_tags":rel_tags, "location": location, "title":title, "form":form, "user_details":user_details })
 
 
 @login_required(login_url='/accounts/login/')
@@ -47,6 +48,9 @@ def new_article(request):
     else:
         form = NewArticleForm()
     return render(request, 'new_article.html', {"form": form})
+
+def profile_page(request):
+    pass
 
 
 

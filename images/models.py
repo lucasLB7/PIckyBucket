@@ -25,6 +25,11 @@ class Editor(models.Model):
     class Meta:
         ordering = ['first_name']
 
+    @classmethod
+    def view_editor_details(cls):
+        results = cls.objects.filter()
+        return results
+
 
 
 class Category(models.Model):
@@ -182,6 +187,13 @@ class NewsLetterRecipients(models.Model):
 
     def __str__(self):
         return self.name
+
+class UserProfile(models.Model):
+    url = models.URLField()
+    home_address = models.TextField()
+    # phone_numer = models.PhoneNumberField()
+    user = models.ForeignKey(User, unique=True)
+    
 
 
 

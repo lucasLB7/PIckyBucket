@@ -1,19 +1,6 @@
 {% extends 'base/base.html' %}
 {% load bootstrap3 %}
 
-{% block script %}
-  <script type="text/javascript">
-    $('#clip_board').attr('data-clipboard-text', $(".text_copy").text())
-    window.onload = function(){
-        var client = new ZeroClipboard(document.getElementsByClassName("image.article_image") );
-        client.on( "ready", function( readyEvent ) {
-          client.on( "aftercopy", function( event ) {
-            alert("Copied.." );
-          });
-        });
-      }
-    </script>
-{%endblock%}
 
 {% block content %}
 {{block.super}}
@@ -33,7 +20,7 @@
 
         <div class="col-md-6 container home-background"> 
         <!-- main content -->
-        <h3 class="all-headers image-center text-center">Browse images:</h3>
+        <h3 class="all-headers image-center text-center">Discover:</h3>
           
      
      <div class="row center-text">
@@ -42,7 +29,12 @@
        {% for item in all_images %}
       
        <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6 images-home">
-           <h1 class="cardHeader">{{item.title}}</h1>
+          
+           <h1 class="cardHeader">{{item.editor}}</h1>
+           <div class="avatar">
+           {% load avatar_tags %}
+          {% avatar user 30 %}
+          </div>
 
            {% if item.article_image.url %}
 
