@@ -9,16 +9,9 @@
 
 
       
-        <div class="col-md-3 travel_emoji"> 
-          <!-- content for left widgets -->
-              <img src="../../media/travel_emoji.jpg"  alt="">
-            </div>
-
-        
-            
          
 
-        <div class="col-md-6 container home-background"> 
+        <div class="container home-background"> 
         <!-- main content -->
         <h3 class="all-headers image-center text-center">Discover:</h3>
           
@@ -29,11 +22,12 @@
        {% for item in all_images %}
       
        <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6 images-home">
-          
-           <h1 class="cardHeader">{{item.editor}}</h1>
+        {% load avatar_tags %}
+        {% avatar user 30 %}
+        <p> {{news_item.editor}} </p>
+           <p class="small">Posted on: {{item.pub_date}} by <strong>{{item.editor}}</strong> </p>
+           <h3 class="cardHeader"></h3>
            <div class="avatar">
-           {% load avatar_tags %}
-          {% avatar user 30 %}
           </div>
 
            {% if item.article_image.url %}
@@ -50,14 +44,14 @@
 
 
         <!-- Trigger the modal with a button -->
-<button type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#{{item.id}}">Open Modal</button>
+<button type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#{{item.id}}">View details</button>
 
 <!-- Modal -->
 <div id="{{item.id}}" class="modal fade" role="dialog">
   <div class="modal-dialog">
 
     <!-- Modal content-->
-    <div class="modal-content">
+    <div class="modal-content d-flex align-items-stretch">
       <div class="modal-header">
         <button type="button" class="close" data-dismiss="modal">&times;</button>
         <h4 class="modal-title">Modal Header</h4>
@@ -67,18 +61,9 @@
         <p><img src="{{ item.article_image.url }}" class="img-responsive" alt="Image"></p>
         <h2>{{item.title}}</h2>
         <p> Posted by: <strong>{{item.editor}}</strong> </p>
-         <p> {{ news_item.post|truncatechars:150 }} <a href="/image/{{ item.id }}" class="btn btn-link my-link">Read more</a></p>
+         <p> {{ news_item.post|truncatechars:150 }} <a href="/image/{{ item.id }}" class="btn btn-link my-link">View page</a></p>
         {% endif %}
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-      </div>
-    </div>
-
-  </div>
-</div>
-
-               <h4 class="white_fill"> Category:</h4>
+        <h4 class="white_fill"> Category:</h4>
 
                {% for category in item.category.all%}
 
@@ -96,10 +81,19 @@
                         <span class="cat-tag">{{ loc.continent }} </span>
                         <span class="cat-tag">{{ loc.location_descrition }} </span>
                         {% endfor %}
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+               
                     
 
-           <p> {{news_item.editor}} </p>
-           <p class="small">Posted on: {{item.pub_date}} </p>
+           
            <button id='clip_board' data-clipboard-text="" class="copy-button">Copy to ClipBoard</button>
            
        </div>
@@ -113,14 +107,7 @@
 </div>
 
 
-<div class="col-md-3"> 
-    <!-- content for left widgets -->
-    <div class="travel_emoji"> 
-        <!-- content for left widgets -->
-            <img src="../../media/boy-playing-guitar-music-character-by-Vexels.png"  alt="" style="margin-bottom: 40% "><br><br>
-            <img src="../../media/rocket-illustration-rocket-illustration-by-Vexels.png"  alt="">
-          </div>
-   </div>
+
   </div>
 
 

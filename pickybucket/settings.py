@@ -50,6 +50,8 @@ INSTALLED_APPS = [
     'images',
     'location_field.apps.DefaultConfig',
     'avatar',
+    'vote',
+
 ]
 
 MIDDLEWARE = [

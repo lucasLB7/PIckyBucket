@@ -49,8 +49,10 @@ def new_article(request):
         form = NewArticleForm()
     return render(request, 'new_article.html', {"form": form})
 
+    
+@login_required(login_url='/accounts/login/')
 def profile_page(request):
-    pass
+    return render(request,'profile.html')
 
 
 

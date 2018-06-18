@@ -1,0 +1,12 @@
+{% load bootstrap3 %}
+{% block content %}
+
+<div class="background">
+    <div class="row">
+
+            {% load avatar_tags %}
+            {% avatar user 30 %}
+            <h1>Welcome back {{ user }}</h1>
+    </div>
+</div>
+{% endblock %}

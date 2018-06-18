@@ -206,7 +206,9 @@ font-family: 'Poiret One', cursive;
 } */
 
 
-.avatar{
-  border-radius: 50%;
-  background-color: red;
+
+.CarouselImg img {
+  width: 100%;
+  height: auto;
+  max-height: 500px;
 }

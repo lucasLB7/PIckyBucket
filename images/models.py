@@ -3,6 +3,7 @@ from django.db.models import Q
 from django.contrib.auth.models import User
 from tinymce.models import HTMLField
 import datetime as dt
+# from vote.models import VoteModel
 
 class Editor(models.Model):
     first_name = models.CharField(max_length = 30)
@@ -197,8 +198,60 @@ class UserProfile(models.Model):
 
 
 
+# class ArticleReview(VoteModel, models.Model):
+#     review = ArticleReview.objects.get(pk=1)
+
+#     # Up vote to the object
+#     review.votes.up(user_id)
+
+#     # Down vote to the object
+#     review.votes.down(user_id)
+
+#     # Removes a vote from the object
+#     review.votes.delete(user_id)
+
+#     # Check if the user already voted the object
+#     review.votes.exists(user_id)
+
+#     # Returns the number of votes for the object
+#     review.votes.count()
+
+#     # Returns a list of users who voted and their voting date
+#     review.votes.user_ids()
+
+
+#     # Returns all instances voted by user
+#     Review.votes.all(user_id)
 
 
 
 
+class Follow_user(models.Model):
+    follower
 
+
+
+class Profile(models.Model):
+    class Profile(models.Model):
+    """
+    Profile class that defines objects of each profile
+    """
+    username = models.CharField(max_length=30,default='User')
+    profile_photo = models.ImageField(upload_to="pics/",null = True)
+    bio = models.TextField(default='User does Not have a Bio yet',blank=True)
+    user = models.ForeignKey(User, on_delete=models.CASCADE, null= True )
+    
+    def __str__(self):
+        return self.username
+
+    def save_profile(self):
+        self.save()
+
+    def delete_profile(self):
+        self.delete()
+
+
+    @classmethod
+    def find_profile(cls,name):
+        found_profiles = cls.objects.filter(username__icontains = name).all()
+        return found_profiles
