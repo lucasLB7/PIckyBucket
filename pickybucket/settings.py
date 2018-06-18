@@ -48,7 +48,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'images',
-    'location_field.apps.DefaultConfig',
+    # 'location_field.apps.DefaultConfig',
     'avatar',
     'vote',
 

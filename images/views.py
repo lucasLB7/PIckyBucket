@@ -1,11 +1,56 @@
 from django.shortcuts import render, redirect
 from django.http import HttpResponse, Http404, HttpResponseRedirect
 import datetime as dt
-from .models import Image,Category,Tag, Location, NewsLetterRecipients, Editor
+from .models import Image, Comment, Like, Follow, Profile
 from django.db.models import Q
 from .forms import SubscribeForm, NewArticleForm
 from .email import registered 
 from django.contrib.auth.decorators import login_required
+
+
+@login_required(login_url='/auth/login/')
+def timeline(request):
+    
+    title = 'Browse'
+
+    date = dt.date.today() # Returns todays date
+
+    current_user = request.user
+
+    followed_people = []
+
+    view_images = []
+
+        
+    following  = Follow.objects.filter(follower = current_user)
+    is_following = Follow.objects.filter(follower = current_user).count()
+
+
+    try:
+        if is_following != 0:
+            for item in following:
+                select_img = Profile.objects.filter(id = item.user.id)
+                for it in select_img:
+                    followed_people.append(it)
+            for item in followed_people:
+                post = Image.objects.filter(user_key = item.user)
+                for itm in post:
+                    view_images.append(itm)
+                    img = list(reversed(view_images))
+            return render(request, 'main/timeline.html', {"date":date, "img":img, "title":title })
+    except:
+        raise Http404
+    return render(request, 'main/fresh_start.html')
+
+
+
+
+
+@login_required(login_url='/accounts/login/')
+def profile_page(request):
+    return render(request,'user/profile.html')
+    
+
 
 
 
@@ -50,9 +95,6 @@ def new_article(request):
     return render(request, 'new_article.html', {"form": form})
 
     
-@login_required(login_url='/accounts/login/')
-def profile_page(request):
-    return render(request,'profile.html')
 
 
 

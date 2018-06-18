@@ -13,6 +13,7 @@ urlpatterns = [
     url(r'^new/article$', views.new_article, name='new-article'),
     url(r'profile', views.profile_page, name='profile')
     
+    
 ]
 
 if settings.DEBUG:
