@@ -63,7 +63,7 @@ def updateProfile(request):
     title = "Change profile"
     user = request.user
 
-    profile = Profile.objects.all()
+    profile = Profile.objects.get(user_id = user)
 
     if request.method == 'POST':
         form = updateProfileForm(request.POST)
