@@ -9,9 +9,10 @@ urlpatterns = [
     url(r'^$', views.homePageElements, name='home'),
     url(r'^archives/(\d{4}-\d{2}-\d{2})/$',views.images_by_date,name = 'DatedProjects'),
     url(r'^search/',views.search_results, name='search_results'),
-    url(r'^image/(\d+)',views.image,name='image'),
+    url(r'^image/(?P<image_id>\d+)',views.image,name='image'),
     url(r'^new/article$', views.new_article, name='new-article'),
-    url(r'profile', views.profile_page, name='profile')
+    url(r'profile', views.profile_page, name='profile'),
+    url(r'updateProfile', views.updateProfile, name='change')
     
 ]
 

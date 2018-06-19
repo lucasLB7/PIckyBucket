@@ -13,6 +13,7 @@ class Editor(models.Model):
     current_country = models.CharField(max_length = 30)
     phone_number = models.CharField(max_length = 10, blank = True)
     editor_photo = models.ImageField(upload_to = 'editors/')
+    user = models.ForeignKey(User, on_delete=models.CASCADE, null= True )
     
     def __str__(self):
         return self.first_name
@@ -30,7 +31,6 @@ class Editor(models.Model):
     def view_editor_details(cls):
         results = cls.objects.filter()
         return results
-
 
 
 class Category(models.Model):
@@ -131,12 +131,14 @@ class Location(models.Model):
 class Image(models.Model):
     title = models.CharField(max_length = 60)
     description = HTMLField()
-    editor = models.ForeignKey(User,on_delete=models.CASCADE)
+    # editor = models.ForeignKey(User,on_delete=models.CASCADE)
     category = models.ManyToManyField(Category, related_name='category')
     tag = models.ManyToManyField(Tag, related_name='tag')
     pub_date = models.DateTimeField(auto_now_add=True)
     article_image = models.ImageField(upload_to = 'view_images/')
     location = models.ManyToManyField(Location, related_name='location')
+    user = models.ForeignKey(User, on_delete=models.CASCADE, null= True)
+
     
     # comment = models.ManyToManyField(Comment, related_name='comment')
     # comments = models.ForeignKey(Comment)
@@ -189,13 +191,6 @@ class NewsLetterRecipients(models.Model):
     def __str__(self):
         return self.name
 
-class UserProfile(models.Model):
-    url = models.URLField()
-    home_address = models.TextField()
-    # phone_numer = models.PhoneNumberField()
-    user = models.ForeignKey(User, unique=True)
-    
-
 
 
 # class ArticleReview(VoteModel, models.Model):
@@ -226,20 +221,17 @@ class UserProfile(models.Model):
 
 
 
-class Follow_user(models.Model):
-    follower
+# class Follow_user(models.Model):
+#     follower
 
 
 
 class Profile(models.Model):
-    class Profile(models.Model):
-    """
-    Profile class that defines objects of each profile
-    """
-    username = models.CharField(max_length=30,default='User')
+    username = models.CharField(max_length=30,default='New_User')
     profile_photo = models.ImageField(upload_to="pics/",null = True)
-    bio = models.TextField(default='User does Not have a Bio yet',blank=True)
+    bio = models.TextField(default='welcome..',blank=True)
     user = models.ForeignKey(User, on_delete=models.CASCADE, null= True )
+    
     
     def __str__(self):
         return self.username
@@ -255,3 +247,13 @@ class Profile(models.Model):
     def find_profile(cls,name):
         found_profiles = cls.objects.filter(username__icontains = name).all()
         return found_profiles
+        
+
+class Comment(models.Model):
+    image = models.ForeignKey(Image, on_delete=models.CASCADE, null= True )
+    comment_body = models.CharField(max_length=100)
+
+    @classmethod
+    def get_image_comments(cls, id):
+        comment = Comment.objects.filter(image__pk=id)
+        return comment

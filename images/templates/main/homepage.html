@@ -1,128 +1,130 @@
-{% extends 'base/base.html' %}
-{% load bootstrap3 %}
-
-
-{% block content %}
-{{block.super}}
+{% extends 'base/base.html' %} {% load bootstrap3 %} {% block content %} {{block.super}}
 <div class="background">
-    <div class="row">
+  <div class="row">
 
 
-      
-         
-
-        <div class="container home-background"> 
-        <!-- main content -->
-        <h3 class="all-headers image-center text-center">Discover:</h3>
-          
-     
-     <div class="row center-text">
 
 
-       {% for item in all_images %}
-      
-       <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6 images-home">
-        {% load avatar_tags %}
-        {% avatar user 30 %}
-        <p> {{news_item.editor}} </p>
-           <p class="small">Posted on: {{item.pub_date}} by <strong>{{item.editor}}</strong> </p>
-           <h3 class="cardHeader"></h3>
-           <div class="avatar">
+
+    <div class="container home-background">
+      <!-- main content -->
+      <h3 class="all-headers image-center text-center">Discover:</h3>
+
+
+      <div class="row center-text">
+
+
+        {% for item in all_images %}
+
+        <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6 images-home">
+          {% load avatar_tags %} {% avatar user 30 %}
+          <p> {{news_item.editor}} </p>
+          <p class="small">Posted on: {{item.pub_date}} by
+            <strong>{{item.editor}}</strong>
+          </p>
+          <h3 class="cardHeader"></h3>
+          <div class="avatar">
           </div>
 
-           {% if item.article_image.url %}
+          {% if item.article_image %}
+            <img src="{{ item.article_image.url }}" class="img-responsive" alt="Image">
+          {% else %}
 
-           <img src="{{ item.article_image.url }}" class="img-responsive" alt="Image">
-
-           {% else %}
-
-           <p>No images here..</p>
-           {% endif %}
-           <h2> {{news_item.title}} </h2>
-           <hr>
+          <p>No images here..</p>
+          {% endif %}
+          <h2> {{news_item.title}} </h2>
+          <hr>
 
 
 
-        <!-- Trigger the modal with a button -->
-<button type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#{{item.id}}">View details</button>
+          <!-- Trigger the modal with a button -->
+          <button type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#{{item.id}}">View details</button>
 
-<!-- Modal -->
-<div id="{{item.id}}" class="modal fade" role="dialog">
-  <div class="modal-dialog">
+          <!-- Modal -->
+          <div id="{{item.id}}" class="modal fade" role="dialog">
+            <div class="modal-dialog">
 
-    <!-- Modal content-->
-    <div class="modal-content d-flex align-items-stretch">
-      <div class="modal-header">
-        <button type="button" class="close" data-dismiss="modal">&times;</button>
-        <h4 class="modal-title">Modal Header</h4>
-      </div>
-      <div class="modal-body">
-          {% if item.article_image.url %}
-        <p><img src="{{ item.article_image.url }}" class="img-responsive" alt="Image"></p>
-        <h2>{{item.title}}</h2>
-        <p> Posted by: <strong>{{item.editor}}</strong> </p>
-         <p> {{ news_item.post|truncatechars:150 }} <a href="/image/{{ item.id }}" class="btn btn-link my-link">View page</a></p>
-        {% endif %}
-        <h4 class="white_fill"> Category:</h4>
+              <!-- Modal content-->
+              <div class="modal-content d-flex align-items-stretch">
+                <div class="modal-header">
+                  <button type="button" class="close" data-dismiss="modal">&times;</button>
+                  <h4 class="modal-title">Modal Header</h4>
+                </div>
+                <div class="modal-body">
+                  {% if item.article_image.url %}
+                  <p>
+                    <a href="{% url 'image' image_id=item.id %}">
+                      <img src="{{ item.article_image.url }}" class="img-responsive" alt="Image">
+                    </a>
+                  </p>
+                  <h2>{{item.title}}</h2>
+                  <p> Posted by:
+                    <strong>{{item.editor}}</strong>
+                  </p>
+                  <p> {{ news_item.post|truncatechars:150 }}
+                    <a href="/image/{{ item.id }}" class="btn btn-link my-link">View page</a>
+                  </p>
+                  {% endif %}
+                  <h4 class="white_fill"> Category:</h4>
 
-               {% for category in item.category.all%}
+                  {% for category in item.category.all%}
 
-                    <span class="cat-tag">{{ category.category_type }} </span>
-                    {% endfor %}
+                  <span class="cat-tag">{{ category.category_type }} </span>
+                  {% endfor %}
 
-                    <h4 class="white_fill">Tags: </h4>
-                {% for tag in item.tag.all %}
-                    <span class="cat-tag">{{ tag.tags }} </span>
-                    {% endfor %}
-                    
-                    <h4 class="white_fill">Location: </h4>
-                    {% for loc in item.location.all %}
-                        <span class="cat-tag"><strong>{{ loc.country }}</strong> </span>
-                        <span class="cat-tag">{{ loc.continent }} </span>
-                        <span class="cat-tag">{{ loc.location_descrition }} </span>
-                        {% endfor %}
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                  <h4 class="white_fill">Tags: </h4>
+                  {% for tag in item.tag.all %}
+                  <span class="cat-tag">{{ tag.tags }} </span>
+                  {% endfor %}
+
+                  <h4 class="white_fill">Location: </h4>
+                  {% for loc in item.location.all %}
+                  <span class="cat-tag">
+                    <strong>{{ loc.country }}</strong>
+                  </span>
+                  <span class="cat-tag">{{ loc.continent }} </span>
+                  <span class="cat-tag">{{ loc.location_descrition }} </span>
+                  {% endfor %}
+                </div>
+                <div class="modal-footer">
+                  <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                </div>
+              </div>
+
+            </div>
+          </div>
+
+
+
+
+
+          <button id='clip_board' data-clipboard-text="" class="copy-button">Copy to ClipBoard</button>
+
+        </div>
+        {% empty %}
+        <div class="col-xs-5 col-sm-5 col-md-5 col-lg-5">
+          <h2> Whoop looks like we lost your pictures.... :O </h2>
+        </div>
+        {% endfor %}
+
       </div>
     </div>
 
-  </div>
-</div>
-
-               
-                    
-
-           
-           <button id='clip_board' data-clipboard-text="" class="copy-button">Copy to ClipBoard</button>
-           
-       </div>
-       {% empty %}
-       <div class="col-xs-5 col-sm-5 col-md-5 col-lg-5">
-           <h2> Whoop looks like we lost your pictures.... :O </h2>
-       </div>
-       {% endfor %} 
-       
-</div>
-</div>
-
 
 
   </div>
 
 
 
-<div class="container-fluid">
+  <div class="container-fluid">
 
-    <form  action="{%url 'home'%}" method="post">
-      {%csrf_token%}
-  
-      {% bootstrap_form form layout='inline' %}
+    <form action="{%url 'home'%}" method="post">
+      {%csrf_token%} {% bootstrap_form form layout='inline' %}
       <input type="submit" value="Subscribe">
     </form>
-  
+
   </div>
-      
+
 </div>
 </div>
 
@@ -133,4 +135,3 @@
 
 
 {% endblock %}
-
