@@ -1,9 +1,9 @@
 from django.shortcuts import render, redirect
 from django.http import HttpResponse, Http404, HttpResponseRedirect
 import datetime as dt
-from .models import Image,Category,Tag, Location, NewsLetterRecipients, Editor
+from .models import Image,Category,Tag, Location, NewsLetterRecipients, Editor, Comment, Profile
 from django.db.models import Q
-from .forms import SubscribeForm, NewArticleForm
+from .forms import SubscribeForm, NewArticleForm, CommentsForm, updateProfileForm
 from .email import registered 
 from django.contrib.auth.decorators import login_required
 
@@ -50,9 +50,34 @@ def new_article(request):
     return render(request, 'new_article.html', {"form": form})
 
     
-@login_required(login_url='/accounts/login/')
+# @login_required(login_url='/accounts/login/')
 def profile_page(request):
-    return render(request,'profile.html')
+    title = "View profile"
+    profile = Profile.objects.all()
+    user = request.user
+    return render(request,'profile.html', {"title":title, "profile":profile, "user":user})
+
+
+def updateProfile(request):
+    date = dt.date.today()
+    title = "Change profile"
+    user = request.user
+
+    profile = Profile.objects.all()
+
+    if request.method == 'POST':
+        form = updateProfileForm(request.POST)
+        if form.is_valid():
+            feedback = form.save(commit=False)
+            feedback.profile=profile
+            feedback.save()
+            return redirect('profile', image_id=image_id)
+    else:
+        form = CommentsForm()
+    
+    return render(request,'change_profile.html', {"profile":profile, "date":date, 'form':form, 'user':user})
+
+
 
 
 
@@ -94,12 +119,22 @@ def search_results(request):
 def image(request, image_id):
     date = dt.date.today()
     # comment = Comment.view_all_comments()
+    comments = Comment.objects.all()
+    # comment = comment
 
-    try:
-        image = Image.objects.get(id = image_id)
-    except DoesNotExist:
-        raise Http404()
-    return render(request,'all_images/image.html', {"image":image, "date":date})
+    
+    image = Image.objects.get(id = image_id)
+    if request.method == 'POST':
+        form = CommentsForm(request.POST)
+        if form.is_valid():
+            feedback = form.save(commit=False)
+            feedback.iamge = image
+            feedback.save()
+            return redirect('image', image_id=image_id)
+    else:
+        form = CommentsForm()
+    
+    return render(request,'image.html', {"image":image, "date":date, 'form':form, 'comments':comments})
 
 # def categories(request):
 #     category = Category.objects.all()
