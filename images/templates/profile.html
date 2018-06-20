@@ -1,42 +1,76 @@
-{% load bootstrap3 %} {% block content %}
+{% extends 'base/base.html' %} {% load bootstrap3 %} {% block content %}
 
 
 
 <div class="container">
-    <div class='col-md-4 profilepic'>
-        {% load avatar_tags %} {% avatar user 300 %}
-    </div>
-    <div class='col-md-8'>
-            <h1>Welcome back {{ user }}</h1>
-            <h4>Your email: {{user.email}}</h4>
-            <a href="{% url 'profile'%}">
-                    <button class="btn btn-primary">Edit Profile</button>
-                </a>
-                <h5>
-                        <span style="font-weight:bolder;">Followers:</span>
-                        {{followers | length }}</h5>
-                    <h5>
-                        <span style="font-weight:bolder;">Following:</span>
-                        {{following | length }}</h5>
-       
 
-    </div>
-    <div class='col-md-2'>
-        <h2>View latest photos: </h2>
-    </div>
-</div>
-
-<!-- <div class="background">
-    <div class="row">
-
-            {% load avatar_tags %}
-            {% avatar user 30 %}
-            <h1>Welcome back {{ user }}</h1>
-    </div>
-    <div class="row">
-        <div class="col-md-8">
-            {}
+    <div class="row ws-title">
+        {% load avatar_tags %} {% avatar user 300 class="img-circle" %}
+        <div>
+            <a href="{% url 'avatar_change' %}">Change your profile picture</a>
         </div>
     </div>
-</div> -->
+
+
+
+    <div class='ws-title'>
+        <h4>Welcome back
+            <strong>{{ user }}</strong>
+        </h4>
+        <h4>Your email: {{user.email}}</h4>
+        <h4>Your Bio: {{profile.bio}}</h4>
+        <a href="{% url 'profile'%}">
+            <button class="btn btn-primary">Edit Profile</button>
+        </a>
+        <h5>
+            <span style="font-weight:bolder;">Followers:</span>
+            {{followers | length }}</h5>
+        <h5>
+            <span style="font-weight:bolder;">Following:</span>
+            {{following | length }}</h5>
+
+
+    </div>
+
+    {% for item in user_details %}
+        <p>{{item.first_name}}</p>
+    {% endfor %}
+
+
+
+    {% for item in all_images %}
+
+    <h3>View latest images</h3>
+
+    {% if item.article_image %}
+
+    <div class='container text-center'>
+        <div class="row">
+        <div class="col-md6">
+            <a href="{% url 'image' image_id=item.id %}">
+                <img src="{{ item.article_image.url }}" class="img-responsive" alt="Image">
+            </a>
+        </div>
+        <div class="col-md6">
+            <p> {{item.editor}} </p>
+            <p class="small">Posted on: {{item.pub_date}}</p>
+        </div>
+        </div>
+    </div>
+
+
+
+
+        {% else %}
+
+        <p>No images here..</p>
+        {% endif %}
+        <h2> {{news_item.title}} </h2>
+        <hr>
+    
+    {%endfor%}
+</div>
+
 {% endblock %}
+
+</div>

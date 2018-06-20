@@ -1,1 +1,1 @@
-web: gunicorn zoomin_photos.wsgi
+web: gunicorn pickybucket.wsgi

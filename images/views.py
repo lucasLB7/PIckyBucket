@@ -1,7 +1,7 @@
 from django.shortcuts import render, redirect
 from django.http import HttpResponse, Http404, HttpResponseRedirect
 import datetime as dt
-from .models import Image,Category,Tag, Location, NewsLetterRecipients, Editor, Comment, Profile
+from .models import Image,Category,Tag, Location, NewsLetterRecipients, Editor, Comment, Profile, Follow
 from django.db.models import Q
 from .forms import SubscribeForm, NewArticleForm, CommentsForm, updateProfileForm
 from .email import registered 
@@ -54,8 +54,10 @@ def new_article(request):
 def profile_page(request):
     title = "View profile"
     profile = Profile.objects.all()
+    all_images = Image.view_all_pictures()
+    user_details = Editor.view_editor_details()
     user = request.user
-    return render(request,'profile.html', {"title":title, "profile":profile, "user":user})
+    return render(request,'profile.html', {"title":title, "profile":profile,"all_images":all_images, "user":user, "user_details":user_details})
 
 
 def updateProfile(request):
@@ -76,6 +78,8 @@ def updateProfile(request):
         form = CommentsForm()
     
     return render(request,'change_profile.html', {"profile":profile, "date":date, 'form':form, 'user':user})
+
+
 
 
 
@@ -120,8 +124,9 @@ def image(request, image_id):
     date = dt.date.today()
     # comment = Comment.view_all_comments()
     comments = Comment.objects.all()
+    
     # comment = comment
-
+    
     
     image = Image.objects.get(id = image_id)
     if request.method == 'POST':
@@ -139,3 +144,28 @@ def image(request, image_id):
 # def categories(request):
 #     category = Category.objects.all()
 #     return render(request,'projects/article.html', {"category":category})
+
+# def comment(request, image_id):
+#     comments = Comment.objecta.filter(id = image_id)
+
+
+@login_required(login_url='/accounts/login/')
+def view_profiles(request):
+    all_profiles = Profile.objects.all()
+    return render(request,'view_profile.html',{"all_profiles":all_profiles}) 
+
+
+@login_required(login_url='/accounts/login/')
+def follow(request,user_id):
+    current_user = request.user
+    requested_profile = Profile.objects.get(id = user_id)
+    is_following = Follow.objects.filter(follower = current_user,user = requested_profile).count()
+    follow_object = Follow.objects.filter(follower = current_user,user = requested_profile)
+
+    if is_following == 0:
+        follower = Follow(follower = current_user,user = requested_profile)
+        follower.save()  
+        return redirect(view_profiles)
+    else:
+        follow_object.delete()
+        return redirect(view_profiles)

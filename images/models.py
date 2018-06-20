@@ -106,25 +106,6 @@ class Location(models.Model):
     class Meta:
         verbose_name_plural = "Location"
 
-# class Comment(models.Model):
-    
-#     body = models.CharField(max_length = 60)
-
-#     def __str__(self):
-#         return self.body
-
-    # @classmethod
-    # def view_all_comments(cls):
-    #     results = cls.objects.filter()
-    #     return results
-    
-    # @classmethod
-    # def add_comment(self):
-    #     self.save()
-    
-    # def delete_comment(self):
-    #     self.delete()
-
 
 
 
@@ -140,31 +121,11 @@ class Image(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE, null= True)
 
     
-    # comment = models.ManyToManyField(Comment, related_name='comment')
-    # comments = models.ForeignKey(Comment)
-
-    # def votes_count(self):
-    #     return self.votes.all().count()
-
 
     @classmethod
     def search_by_title(cls,search_term):
         title_search = cls.objects.filter(title__icontains = search_term)
         return title_search
-    
-
-
-
-
-    # @classmethod
-    # def search_by_category(cls, search_term):
-    #     result = cls.objects.filter(category__icontains = search_term)
-    #     return results
-    # @classmethod
-    # def search_by_date(cls, search_term):
-    #     result = cls.objects.filter(pub_date__date = search_term)
-    #     return results
-
 
     @classmethod
     def view_all_pictures(cls):
@@ -176,12 +137,6 @@ class Image(models.Model):
         results = cls.objects.filter(pub_date__date = date)
         return results
 
-    # class Vote(models.Model):
-    #     class Meta:
-    #         unique_together = [('post', 'user')]
-
-    #     post = models.ForeignKey(Post, related_name='votes')
-    #     user = models.ForeignKey('auth.User')
 
 
 class NewsLetterRecipients(models.Model):
@@ -193,36 +148,6 @@ class NewsLetterRecipients(models.Model):
 
 
 
-# class ArticleReview(VoteModel, models.Model):
-#     review = ArticleReview.objects.get(pk=1)
-
-#     # Up vote to the object
-#     review.votes.up(user_id)
-
-#     # Down vote to the object
-#     review.votes.down(user_id)
-
-#     # Removes a vote from the object
-#     review.votes.delete(user_id)
-
-#     # Check if the user already voted the object
-#     review.votes.exists(user_id)
-
-#     # Returns the number of votes for the object
-#     review.votes.count()
-
-#     # Returns a list of users who voted and their voting date
-#     review.votes.user_ids()
-
-
-#     # Returns all instances voted by user
-#     Review.votes.all(user_id)
-
-
-
-
-# class Follow_user(models.Model):
-#     follower
 
 
 
@@ -255,5 +180,27 @@ class Comment(models.Model):
 
     @classmethod
     def get_image_comments(cls, id):
-        comment = Comment.objects.filter(image__pk=id)
+        comment = Comment.objects.filter(image__id=id)
         return comment
+
+
+class Follow(models.Model):
+    follower = models.ForeignKey(User, on_delete=models.CASCADE, null = True)
+    user = models.ForeignKey(Profile, on_delete=models.CASCADE, null = True)
+
+    def __int__(self):
+        return self.follower.filter(user_id =id)
+    
+    def save_follower(self):
+        self.save()
+    
+    def delete_follower(self):
+        self.delete()
+
+
+    @classmethod
+    def get_followers(cls,profile_id):
+        profile = Profile.objects.filter(id = profile_id)
+        followers = cls.objects.filter(user= profile.user.id)
+        return len(followers)
+    

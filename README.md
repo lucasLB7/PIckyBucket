@@ -2,11 +2,13 @@
 
 
 
-This is a Django app created that allows users to view pictures by category, tag and country.
+This is a Django clone of the popular app Instagram (lol)
 
 The app uses the ```django``` framework to create a set of backend databases that are then templated in the main application.
 
 As a user you can also search by **category type**, **tags** or **title**.
+
+
 
 
 
@@ -27,37 +29,6 @@ Then visit `http://localhost:8000` to view the app.
 
 ## requirements.txt
 
-The requirements.txt file serves as a placeholder for python dependancies. 
-    Contents:
-- astroid==1.6.3
-- click==6.7
-- dj-database-url==0.5.0
-- Django==1.11
-- django-bootstrap3==10.0.1
-- dominate==2.3.1
-- Flask==1.0.2
-- Flask-Bootstrap==3.3.7.1
-- Flask-Script==2.0.6
-- Flask-WTF==0.14.2
-- gunicorn==19.8.1
-- isort==4.3.4
-- itsdangerous==0.24
-- Jinja2==2.10
-- lazy-object-proxy==1.3.1
-- MarkupSafe==1.0
-- mccabe==0.6.1
-- Pillow==5.1.0
-- psycopg2==2.7.4
-- psycopg2-binary==2.7.4
-- pyperclip==1.6.2
-- python-decouple==3.1
-- pytz==2018.4
-- six==1.11.0
-- visitor==0.1.3
-- Werkzeug==0.14.1
-- whitenoise==3.3.1
-- wrapt==1.10.11
-- WTForms==2.1
 
 **Once you have run the ```pip installation```, verify that you have all the necessary requirements with the following command:**
 
@@ -66,7 +37,9 @@ The requirements.txt file serves as a placeholder for python dependancies.
  pip3 freeze
  ```
 
-![alt text](./media/thatsall.jpg "Logo Title Text 1")
+ We use pip **3** as it mentions the appropriate python version.
+
+![alt text](./media/boom.png "Logo Title Text 1")
 
 The app should now run smoothly on your local server.......
 

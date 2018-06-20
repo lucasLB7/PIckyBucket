@@ -12,7 +12,9 @@ urlpatterns = [
     url(r'^image/(?P<image_id>\d+)',views.image,name='image'),
     url(r'^new/article$', views.new_article, name='new-article'),
     url(r'profile', views.profile_page, name='profile'),
-    url(r'updateProfile', views.updateProfile, name='change')
+    url(r'updateProfile', views.updateProfile, name='change'),
+    url(r'^view/profiles', views.view_profiles, name='viewProfiles'),
+    url(r'^follow/(\d+)',views.follow ,name='follow'), 
     
 ]
 

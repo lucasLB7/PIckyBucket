@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import Editor, Image, Category, Tag, Location, Profile, User, Comment
+from .models import Editor, Image, Category, Tag, Follow, Location, Profile, User, Comment
 
 
 
@@ -14,7 +14,8 @@ admin.site.register(Category)
 admin.site.register(Tag)
 admin.site.register(Location)
 admin.site.register(Profile)
-admin.site.register
+admin.site.register(Comment)
+admin.site.register(Follow)
 
 # admin.site.register(Comment)
 
